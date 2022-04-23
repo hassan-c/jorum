@@ -21,12 +21,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void addUser(User user) {
+    public User addUser(User user) {
         Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
         if (userOptional.isPresent()) {
             throw new IllegalStateException("User already exists.");
         }
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Transactional

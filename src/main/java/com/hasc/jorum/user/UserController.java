@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping(path ="api/v1/users")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -22,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping
-    public void createNewUser(@RequestBody User user) {
-        userService.addUser(user);
+    public User createNewUser(@RequestBody User user) {
+        return userService.addUser(user);
     }
 
     @PutMapping(path = "update/{userId}")
