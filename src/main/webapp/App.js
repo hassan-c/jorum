@@ -1,5 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
+import SignUpForm from "./components/SignUpForm";
 
 const API = "api/v1";
 
@@ -57,49 +58,16 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <h4>Create a new user</h4>
+      <h1>jorum</h1>
 
-        <form id="signUpForm" onSubmit={(event) => createUser(event)}>
-          <label>
-            Username:
-            <input
-              type="text"
-              name="username"
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Password:
-            <input
-              type="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Email:
-            <input
-              type="text"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Created at:
-            <input
-              type="date"
-              name="createdAt"
-              onChange={(e) => setCreatedAt(e.target.value)}
-              required
-            />
-          </label>
-          <button type="submit">Create</button>
-        </form>
-      </div>
+      <p>Welcome to jorum, a simple forum written in Spring Boot and React.</p>
+      <SignUpForm
+        createUser={createUser}
+        setUsername={setUsername}
+        setPassword={setPassword}
+        setEmail={setEmail}
+        setCreatedAt={setCreatedAt}
+      />
 
       {users.length > 0 && <p>There are currently {users.length} users.</p>}
       <ul>
