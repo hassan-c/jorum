@@ -42,7 +42,7 @@ function App() {
       setUsers(() => users.concat(createUserResponse));
     } else {
       alert(
-        "Could not create user (does a user with that email already exist?"
+        "Could not create user (does a user with that email already exist?)"
       );
     }
   }
