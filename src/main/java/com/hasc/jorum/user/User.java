@@ -1,11 +1,23 @@
 package com.hasc.jorum.user;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "users")
-public class User {
+@Getter
+@Setter
+@NoArgsConstructor
+public class User implements UserDetails {
     @Id
     @SequenceGenerator(
             name = "users_sequence",
@@ -29,46 +41,29 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public User() { }
-
-    public Long getId() {
-        return id;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority("USER"));
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public String getUsername() {
-        return username;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     @Override

@@ -1,6 +1,9 @@
 package com.hasc.jorum.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -8,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -22,7 +25,7 @@ public class UserService {
     }
 
     public User addUser(User user) {
-        Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
+        Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
         if (userOptional.isPresent()) {
             throw new IllegalStateException("User already exists.");
         }
@@ -46,5 +49,11 @@ public class UserService {
             throw new IllegalStateException("User does not exist.");
         }
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
     }
 }

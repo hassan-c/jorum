@@ -1,6 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import SignUpForm from "./components/SignUpForm";
+import LoginForm from "./components/LoginForm";
 
 const API = "api/v1";
 
@@ -10,7 +11,6 @@ function App() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [createdAt, setCreatedAt] = useState("");
 
   useEffect(() => {
     async function fetchUsers() {
@@ -30,8 +30,7 @@ function App() {
       body: JSON.stringify({
         username,
         password,
-        email,
-        createdAt,
+        email
       }),
     });
 
@@ -61,12 +60,14 @@ function App() {
       <h1>jorum</h1>
 
       <p>Welcome to jorum, a simple forum written in Spring Boot and React.</p>
+
+      <LoginForm />
+
       <SignUpForm
         createUser={createUser}
         setUsername={setUsername}
         setPassword={setPassword}
         setEmail={setEmail}
-        setCreatedAt={setCreatedAt}
       />
 
       {users.length > 0 && <p>There are currently {users.length} users.</p>}

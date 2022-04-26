@@ -1,9 +1,9 @@
 export default function SignUpForm(props) {
   return (
     <div className="signUpForm">
-      <h4>Create a new user</h4>
+      <h4>Sign up</h4>
 
-      <form id="signUpForm" onSubmit={(event) => props.createUser(event)}>
+      <form onSubmit={(event) => props.createUser(event)}>
         <label>
           Username:
           <input
@@ -31,16 +31,7 @@ export default function SignUpForm(props) {
             required
           />
         </label>
-        <label>
-          Created at:
-          <input
-            type="date"
-            name="createdAt"
-            onChange={(e) => props.setCreatedAt(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Create</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
