@@ -1,25 +1,47 @@
 import { useState } from "react";
 
-export default function LoginForm() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export default function LoginForm({ setLoggedInUser }) {
+  const [loginUsername, setLoginUsername] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
-  async function loginUser(event, username, password) {
+  const [errorMessage, setErrorMessage] = useState("");
+
+  async function loginUser(event) {
     event.preventDefault();
-    console.log(username, password);
+
+    const userForm = new FormData();
+    userForm.append("username", loginUsername);
+    userForm.append("password", loginPassword);
+
+    const logInRequest = await fetch("/login", {
+      method: "post",
+      body: userForm,
+    });
+
+    if (logInRequest.ok) {
+      setLoggedInUser(loginUsername);
+    } else {
+      if (logInRequest.url.endsWith("error")) {
+        setErrorMessage("Invalid username or password.");
+      } else {
+        setErrorMessage("Error: Could not authenticate you. Try again.");
+      }
+    }
   }
 
   return (
     <div className="loginForm">
-      <h4>Login</h4>
+      <h4>Log in</h4>
 
-      <form onSubmit={(event) => loginUser(event, username, password)}>
+      <p>{errorMessage}</p>
+
+      <form onSubmit={(event) => loginUser(event)}>
         <label>
           Username:
           <input
             type="text"
-            name="username"
-            onChange={(e) => setUsername(e.target.value)}
+            name="loginUsername"
+            onChange={(e) => setLoginUsername(e.target.value)}
             required
           />
         </label>
@@ -27,8 +49,8 @@ export default function LoginForm() {
           Password:
           <input
             type="password"
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
+            name="loginPassword"
+            onChange={(e) => setLoginPassword(e.target.value)}
             required
           />
         </label>

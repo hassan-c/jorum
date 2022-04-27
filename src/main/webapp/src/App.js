@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
+import LoggedInUserMessage from "./components/LoggedInAs";
 
 const API = "api/v1";
 
@@ -12,10 +13,14 @@ function App() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const [loggedInUser, setLoggedInUser] = useState("");
+
   useEffect(() => {
     async function fetchUsers() {
-      const users = await fetch(`${API}/users`);
-      setUsers(await users.json());
+      const getUsers = await fetch(`${API}/users`, { redirect: 'manual' });
+      if (getUsers.ok) {
+        setUsers(await getUsers.json());
+      }
     }
 
     fetchUsers();
@@ -30,7 +35,7 @@ function App() {
       body: JSON.stringify({
         username,
         password,
-        email
+        email,
       }),
     });
 
@@ -61,14 +66,20 @@ function App() {
 
       <p>Welcome to jorum, a simple forum written in Spring Boot and React.</p>
 
-      <LoginForm />
+      {loggedInUser ? (
+        <LoggedInUserMessage loggedInUser={loggedInUser} />
+      ) : (
+        <div>
+          <LoginForm setLoggedInUser={setLoggedInUser} />
 
-      <SignUpForm
-        createUser={createUser}
-        setUsername={setUsername}
-        setPassword={setPassword}
-        setEmail={setEmail}
-      />
+          <SignUpForm
+            createUser={createUser}
+            setUsername={setUsername}
+            setPassword={setPassword}
+            setEmail={setEmail}
+          />
+        </div>
+      )}
 
       {users.length > 0 && <p>There are currently {users.length} users.</p>}
       <ul>

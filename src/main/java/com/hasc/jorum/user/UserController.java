@@ -1,6 +1,8 @@
 package com.hasc.jorum.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +16,11 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping(path = "/user")
+    public Authentication getCurrentUser() {
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 
     @GetMapping
