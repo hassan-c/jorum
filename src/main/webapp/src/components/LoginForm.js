@@ -9,23 +9,21 @@ export default function LoginForm({ setLoggedInUser }) {
   async function loginUser(event) {
     event.preventDefault();
 
-    const userForm = new FormData();
-    userForm.append("username", loginUsername);
-    userForm.append("password", loginPassword);
-
-    const logInRequest = await fetch("/login", {
+    const logInRequest = await fetch("/api/v1/login", {
       method: "post",
-      body: userForm,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: loginUsername,
+        password: loginPassword,
+      }),
     });
 
     if (logInRequest.ok) {
       setLoggedInUser(loginUsername);
+    } else if (logInRequest.status === 403) {
+      setErrorMessage("Invalid username or password.");
     } else {
-      if (logInRequest.url.endsWith("error")) {
-        setErrorMessage("Invalid username or password.");
-      } else {
-        setErrorMessage("Error: Could not authenticate you. Try again.");
-      }
+      setErrorMessage("Error: Could not authenticate you.");
     }
   }
 

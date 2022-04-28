@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     async function fetchUsers() {
-      const getUsers = await fetch(`${API}/users`, { redirect: 'manual' });
+      const getUsers = await fetch(`${API}/users`);
       if (getUsers.ok) {
         setUsers(await getUsers.json());
       }
