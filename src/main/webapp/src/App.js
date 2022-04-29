@@ -57,22 +57,20 @@ function App() {
                   Users
                 </Link>
                 <Spacer />
-                <Button as={RouterLink} to="/login">
-                  Log in
-                </Button>
-                <Button as={RouterLink} to="/signup">
-                  Sign up
-                </Button>
+                {loggedInUser ? (
+                  <LoggedInUserMessage loggedInUser={loggedInUser} />
+                ) : (
+                  <>
+                    <Button as={RouterLink} to="/login">
+                      Log in
+                    </Button>
+                    <Button as={RouterLink} to="/signup">
+                      Sign up
+                    </Button>
+                  </>
+                )}
               </HStack>
             </Flex>
-
-            {/* <Box>
-              {loggedInUser ? (
-                <LoggedInUserMessage loggedInUser={loggedInUser} />
-              ) : (
-                <LoginForm setLoggedInUser={setLoggedInUser} />
-              )}
-            </Box> */}
 
             <Routes>
               <Route path="/" element={<p>Hello!</p>} />

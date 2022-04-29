@@ -1,12 +1,17 @@
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Box,
   Button,
   FormControl,
   FormLabel,
   Heading,
-  Input,
+  Input
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +20,8 @@ export default function SignUpForm() {
 
   const [signUpUsername, setSignUpUsername] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
+
+  const navigate = useNavigate();
 
   async function signUpUser(event) {
     event.preventDefault();
@@ -32,11 +39,9 @@ export default function SignUpForm() {
     });
 
     if (createUser.ok) {
-      alert("all good");
+      return navigate("/");
     } else {
-      alert(
-        "Could not create user (does a user with that email already exist?)"
-      );
+      setErrorMessage("User with that name already exists");
     }
 
     setIsLoading(false);
@@ -49,6 +54,14 @@ export default function SignUpForm() {
           Sign up
         </Heading>
       </Box>
+
+      {errorMessage && (
+        <Alert status="error">
+          <AlertIcon />
+          <AlertTitle>Couldn't sign you up</AlertTitle>
+          <AlertDescription>{errorMessage}</AlertDescription>
+        </Alert>
+      )}
 
       <form onSubmit={(event) => signUpUser(event)}>
         <FormControl>
@@ -70,7 +83,7 @@ export default function SignUpForm() {
           />
         </FormControl>
         <Button type="submit" mt={4} isLoading={isLoading}>
-          Submit
+          Sign up
         </Button>
       </form>
     </Box>
