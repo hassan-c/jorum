@@ -43,7 +43,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("USER"));
+        return Collections.singleton(new SimpleGrantedAuthority(UserRole.USER.name()));
     }
 
     @Override
@@ -64,15 +64,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", createdAt=" + createdAt +
-                '}';
     }
 }

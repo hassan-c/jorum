@@ -18,7 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/user")
+    @GetMapping(path = "/current")
     public Authentication getCurrentUser() {
         return SecurityContextHolder.getContext().getAuthentication();
     }

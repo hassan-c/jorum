@@ -1,8 +1,9 @@
-import "./App.css";
+import { Box, Button, Center, ChakraProvider, Stack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import SignUpForm from "./components/SignUpForm";
-import LoginForm from "./components/LoginForm";
+import Header from "./components/Header";
 import LoggedInUserMessage from "./components/LoggedInAs";
+import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/SignUpForm";
 
 const API = "api/v1";
 
@@ -61,42 +62,52 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>jorum</h1>
+    <ChakraProvider>
+      <Center w="75%" mt="1em">
+        <Box>
+          <Stack spacing={5}>
+            <Header />
 
-      <p>Welcome to jorum, a simple forum written in Spring Boot and React.</p>
+            <Box>
+              {loggedInUser ? (
+                <LoggedInUserMessage loggedInUser={loggedInUser} />
+              ) : (
+                <LoginForm setLoggedInUser={setLoggedInUser} />
+              )}
+            </Box>
 
-      {loggedInUser ? (
-        <LoggedInUserMessage loggedInUser={loggedInUser} />
-      ) : (
-        <div>
-          <LoginForm setLoggedInUser={setLoggedInUser} />
+            <SignUpForm
+              createUser={createUser}
+              setUsername={setUsername}
+              setPassword={setPassword}
+              setEmail={setEmail}
+            />
 
-          <SignUpForm
-            createUser={createUser}
-            setUsername={setUsername}
-            setPassword={setPassword}
-            setEmail={setEmail}
-          />
-        </div>
-      )}
-
-      {users.length > 0 && <p>There are currently {users.length} users.</p>}
-      <ul>
-        {users.map((user) => {
-          return (
-            <li key={user.id}>
-              {user.username}{" "}
-              <button onClick={() => deleteUser(user.id)}>Delete</button>
+            <Box>
+              {users.length > 0 && (
+                <p>There are currently {users.length} users.</p>
+              )}
               <ul>
-                <li>Email: {user.email}</li>
-                <li>Created: {user.createdAt}</li>
+                {users.map((user) => {
+                  return (
+                    <li key={user.id}>
+                      {user.username}{" "}
+                      <Button onClick={() => deleteUser(user.id)}>
+                        Delete
+                      </Button>
+                      <ul>
+                        <li>Email: {user.email}</li>
+                        <li>Created: {user.createdAt}</li>
+                      </ul>
+                    </li>
+                  );
+                })}
               </ul>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+            </Box>
+          </Stack>
+        </Box>
+      </Center>
+    </ChakraProvider>
   );
 }
 

@@ -1,3 +1,15 @@
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input
+} from "@chakra-ui/react";
 import { useState } from "react";
 
 export default function LoginForm({ setLoggedInUser }) {
@@ -6,8 +18,12 @@ export default function LoginForm({ setLoggedInUser }) {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   async function loginUser(event) {
     event.preventDefault();
+
+    setIsLoading(true);
 
     const logInRequest = await fetch("/api/v1/login", {
       method: "post",
@@ -21,39 +37,51 @@ export default function LoginForm({ setLoggedInUser }) {
     if (logInRequest.ok) {
       setLoggedInUser(loginUsername);
     } else if (logInRequest.status === 403) {
-      setErrorMessage("Invalid username or password.");
+      setErrorMessage("Invalid username or password");
     } else {
-      setErrorMessage("Error: Could not authenticate you.");
+      setErrorMessage("Could not authenticate you");
     }
+
+    setIsLoading(false);
   }
 
   return (
-    <div className="loginForm">
-      <h4>Log in</h4>
+    <Box className="loginForm">
+      <Box mb={4}>
+        <Heading as="h4" size="lg">
+          Log in
+        </Heading>
+      </Box>
 
-      <p>{errorMessage}</p>
+      {errorMessage && <Alert status="error">
+        <AlertIcon />
+        <AlertTitle>Couldn't sign you in</AlertTitle>
+        <AlertDescription>{errorMessage}</AlertDescription>
+      </Alert>}
 
       <form onSubmit={(event) => loginUser(event)}>
-        <label>
-          Username:
-          <input
+        <FormControl>
+          <FormLabel>Username</FormLabel>
+          <Input
             type="text"
             name="loginUsername"
             onChange={(e) => setLoginUsername(e.target.value)}
             required
           />
-        </label>
-        <label>
-          Password:
-          <input
+        </FormControl>
+        <FormControl>
+          <FormLabel>Password</FormLabel>
+          <Input
             type="password"
             name="loginPassword"
             onChange={(e) => setLoginPassword(e.target.value)}
             required
           />
-        </label>
-        <button type="submit">Log in</button>
+        </FormControl>
+        <Button type="submit" mt={4} isLoading={isLoading}>
+          Log in
+        </Button>
       </form>
-    </div>
+    </Box>
   );
 }

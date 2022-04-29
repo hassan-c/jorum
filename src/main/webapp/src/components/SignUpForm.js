@@ -1,3 +1,5 @@
+import { Button } from "@chakra-ui/react";
+
 export default function SignUpForm(props) {
   return (
     <div className="signUpForm">
@@ -31,7 +33,7 @@ export default function SignUpForm(props) {
             required
           />
         </label>
-        <button type="submit">Submit</button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   );
