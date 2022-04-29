@@ -8,7 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -32,9 +32,9 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String email;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
-    public User(String username, String password, String email, LocalDate createdAt) {
+    public User(String username, String password, String email, LocalDateTime createdAt) {
         this.username = username;
         this.password = password;
         this.email = email;

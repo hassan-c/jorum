@@ -8,17 +8,17 @@ import {
   FormControl,
   FormLabel,
   Heading,
-  Input
+  Input,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
 export default function LoginForm({ setLoggedInUser }) {
-  const [loginUsername, setLoginUsername] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [loginUsername, setLoginUsername] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
   async function loginUser(event) {
     event.preventDefault();
@@ -53,11 +53,13 @@ export default function LoginForm({ setLoggedInUser }) {
         </Heading>
       </Box>
 
-      {errorMessage && <Alert status="error">
-        <AlertIcon />
-        <AlertTitle>Couldn't sign you in</AlertTitle>
-        <AlertDescription>{errorMessage}</AlertDescription>
-      </Alert>}
+      {errorMessage && (
+        <Alert status="error">
+          <AlertIcon />
+          <AlertTitle>Couldn't log you in</AlertTitle>
+          <AlertDescription>{errorMessage}</AlertDescription>
+        </Alert>
+      )}
 
       <form onSubmit={(event) => loginUser(event)}>
         <FormControl>

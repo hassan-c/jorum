@@ -1,5 +1,6 @@
 package com.hasc.jorum.signup;
 
+import com.hasc.jorum.user.User;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,7 @@ public class SignUpController {
     private SignUpService signUpService;
 
     @PostMapping
-    public String signUp(@RequestBody SignUpRequest signUpRequest) {
+    public User signUp(@RequestBody SignUpRequest signUpRequest) {
         return signUpService.signUp(signUpRequest);
     }
 }
