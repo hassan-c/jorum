@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 
 export default function Header() {
   return (
@@ -6,10 +6,6 @@ export default function Header() {
       <Heading as="h1" size="lg">
         jorum
       </Heading>
-
-      <Text>
-        Welcome to jorum, a simple forum written in Spring Boot and React.
-      </Text>
     </Box>
   );
 }

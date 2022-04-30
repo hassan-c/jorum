@@ -18,7 +18,6 @@ public class SignUpService {
         newUser.setUsername(signUpRequest.username());
         newUser.setPassword(signUpRequest.password());
         newUser.setCreatedAt(LocalDateTime.now());
-
         return userService.addUser(newUser);
     }
 }

@@ -11,37 +11,41 @@ import {
   Input
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const [signUpMessage, setSignUpMessage] = useState();
 
   const [signUpUsername, setSignUpUsername] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
-
-  const navigate = useNavigate();
 
   async function signUpUser(event) {
     event.preventDefault();
 
     setIsLoading(true);
 
-    const createUser = await fetch(`api/v1/users`, {
+    const createUser = await fetch(`api/v1/signup`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: signUpUsername,
         password: signUpPassword,
-        email: "example@example.com",
       }),
     });
 
     if (createUser.ok) {
-      return navigate("/");
+      setSignUpMessage({
+        type: "success",
+        title: "Success",
+        description: `Signed up as ${signUpUsername}, now log in`,
+      });
     } else {
-      setErrorMessage("User with that name already exists");
+      setSignUpMessage({
+        type: "error",
+        title: "Couldn't sign you in",
+        description: "User with that name already exists",
+      });
     }
 
     setIsLoading(false);
@@ -55,11 +59,11 @@ export default function SignUpForm() {
         </Heading>
       </Box>
 
-      {errorMessage && (
-        <Alert status="error">
+      {signUpMessage && (
+        <Alert status={signUpMessage.type}>
           <AlertIcon />
-          <AlertTitle>Couldn't sign you up</AlertTitle>
-          <AlertDescription>{errorMessage}</AlertDescription>
+          <AlertTitle>{signUpMessage.title}</AlertTitle>
+          <AlertDescription>{signUpMessage.description}</AlertDescription>
         </Alert>
       )}
 

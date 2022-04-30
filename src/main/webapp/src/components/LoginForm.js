@@ -8,11 +8,13 @@ import {
   FormControl,
   FormLabel,
   Heading,
-  Input
+  Input,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm({ setLoggedInUser }) {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -36,6 +38,7 @@ export default function LoginForm({ setLoggedInUser }) {
 
     if (logInRequest.ok) {
       setLoggedInUser(loginUsername);
+      navigate("/");
     } else if (logInRequest.status === 403) {
       setErrorMessage("Invalid username or password");
     } else {
@@ -53,11 +56,13 @@ export default function LoginForm({ setLoggedInUser }) {
         </Heading>
       </Box>
 
-      {errorMessage && <Alert status="error">
-        <AlertIcon />
-        <AlertTitle>Couldn't log you in</AlertTitle>
-        <AlertDescription>{errorMessage}</AlertDescription>
-      </Alert>}
+      {errorMessage && (
+        <Alert status="error">
+          <AlertIcon />
+          <AlertTitle>Couldn't log you in</AlertTitle>
+          <AlertDescription>{errorMessage}</AlertDescription>
+        </Alert>
+      )}
 
       <form onSubmit={(event) => loginUser(event)}>
         <FormControl>

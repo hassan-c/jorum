@@ -19,8 +19,9 @@ public class UserController {
     }
 
     @GetMapping(path = "/current")
-    public Authentication getCurrentUser() {
-        return SecurityContextHolder.getContext().getAuthentication();
+    public String getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 
     @GetMapping
