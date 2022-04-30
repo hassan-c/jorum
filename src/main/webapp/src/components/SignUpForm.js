@@ -43,7 +43,7 @@ export default function SignUpForm() {
     } else {
       setSignUpMessage({
         type: "error",
-        title: "Couldn't sign you in",
+        title: "Couldn't sign you up",
         description: "User with that name already exists",
       });
     }

@@ -47,7 +47,7 @@ function App() {
   return (
     <ChakraProvider>
       <Center>
-        <Stack spacing={5} minW={[200, 500, 800]}>
+        <Stack spacing={5} minW={[300, 500, 1000]}>
           <Header />
 
           <HStack as="nav" bg="gray.50" p={2} spacing={4}>
