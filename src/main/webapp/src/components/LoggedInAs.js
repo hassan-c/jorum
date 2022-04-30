@@ -1,9 +1,9 @@
-import { Text } from "@chakra-ui/react"
+import { Box, Text } from "@chakra-ui/react";
 
 export default function LoggedInAs({ loggedInUser }) {
   return (
-    <div className="loggedInAs">
+    <Box>
       You are logged in as <Text as="b">{loggedInUser}</Text>
-    </div>
+    </Box>
   );
 }
