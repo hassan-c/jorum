@@ -1,5 +1,6 @@
 package com.hasc.jorum.user;
 
+import com.hasc.jorum.user.exception.UsernameAlreadyExistsException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,19 +18,16 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    private final BCryptPasswordEncoder passwordEncoder;
-
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     public User addUser(User user) {
         Optional<User> userOptional = userRepository.findByUsernameIgnoreCase(user.getUsername());
-        if (userOptional.isPresent()) {
-            throw new IllegalStateException("User already exists.");
-        }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (userOptional.isPresent()) {
+            throw new UsernameAlreadyExistsException("User already exists.");
+        }
 
         return userRepository.save(user);
     }
@@ -37,7 +35,7 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void updateUser(Long id, User newUser) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("User does not exist."));
+                .orElseThrow(() -> new UsernameNotFoundException("User does not exist."));
 
         user.setUsername(newUser.getUsername());
         user.setPassword(newUser.getPassword());
@@ -48,7 +46,7 @@ public class UserService implements UserDetailsService {
     public void deleteUser(Long id) {
         boolean userExists = userRepository.existsById(id);
         if (!userExists) {
-            throw new IllegalStateException("User does not exist.");
+            throw new UsernameNotFoundException("User does not exist.");
         }
         userRepository.deleteById(id);
     }
