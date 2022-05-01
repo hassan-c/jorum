@@ -24,7 +24,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User addUser(User user) {
-        Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
+        Optional<User> userOptional = userRepository.findByUsernameIgnoreCase(user.getUsername());
         if (userOptional.isPresent()) {
             throw new IllegalStateException("User already exists.");
         }
@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username)
+        return userRepository.findByUsernameIgnoreCase(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
     }
 }

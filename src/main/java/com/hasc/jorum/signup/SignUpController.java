@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "api/v1/signup")
+@RequestMapping("api/v1/signup")
 @AllArgsConstructor
 public class SignUpController {
 
