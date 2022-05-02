@@ -39,7 +39,6 @@ public class UserService implements UserDetailsService {
 
         user.setUsername(newUser.getUsername());
         user.setPassword(newUser.getPassword());
-        user.setEmail(newUser.getEmail());
         user.setCreatedAt(newUser.getCreatedAt());
     }
 

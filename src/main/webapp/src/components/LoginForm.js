@@ -72,6 +72,8 @@ export default function LoginForm({ setLoggedInUser }) {
             name="loginUsername"
             onChange={(e) => setLoginUsername(e.target.value)}
             required
+            pattern="[a-zA-Z0-9_-]+"
+            maxLength={20}
           />
         </FormControl>
         <FormControl>

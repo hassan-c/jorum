@@ -8,7 +8,7 @@ import {
   FormControl,
   FormLabel,
   Heading,
-  Input
+  Input,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -38,13 +38,13 @@ export default function SignUpForm() {
       setSignUpMessage({
         type: "success",
         title: "Success",
-        description: `Signed up as ${signUpUsername}, now log in`,
+        description: `Signed up as ${signUpUsername}. You may now log in`,
       });
     } else {
       setSignUpMessage({
         type: "error",
         title: "Couldn't sign you up",
-        description: "User with that name already exists",
+        description: "A user with that name already exists",
       });
     }
 
@@ -67,6 +67,13 @@ export default function SignUpForm() {
         </Alert>
       )}
 
+      <Box my={5}>
+        <p>
+          Usernames must be alphanumeric, though hyphens and underscores are
+          allowed.
+        </p>
+      </Box>
+
       <form onSubmit={(event) => signUpUser(event)}>
         <FormControl>
           <FormLabel>Username</FormLabel>
@@ -75,6 +82,8 @@ export default function SignUpForm() {
             name="signUpUsername"
             onChange={(e) => setSignUpUsername(e.target.value)}
             required
+            pattern="[a-zA-Z0-9_-]+"
+            maxLength={20}
           />
         </FormControl>
         <FormControl>

@@ -34,13 +34,11 @@ public class User implements UserDetails {
 
     @JsonIgnore
     private String password;
-    private String email;
     private LocalDateTime createdAt;
 
-    public User(String username, String password, String email, LocalDateTime createdAt) {
+    public User(String username, String password, LocalDateTime createdAt) {
         this.username = username;
         this.password = password;
-        this.email = email;
         this.createdAt = createdAt;
     }
 
