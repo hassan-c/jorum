@@ -1,5 +1,6 @@
 import {
   Button,
+  Skeleton,
   Table,
   TableCaption,
   TableContainer,
@@ -12,6 +13,8 @@ import {
 import { useEffect, useState } from "react";
 
 export default function Users() {
+  const [isLoading, setIsLoading] = useState(true);
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -20,6 +23,8 @@ export default function Users() {
       if (getUsers.ok) {
         setUsers(await getUsers.json());
       }
+
+      setIsLoading(false);
     }
 
     fetchUsers();
@@ -34,34 +39,32 @@ export default function Users() {
     }
   }
   return (
-    <TableContainer>
-      <Table>
-        <TableCaption placement="top">{users.length} users</TableCaption>
-        <Thead>
-          <Tr>
-            <Th>Username</Th>
-            <Th>Email</Th>
-            <Th>Join Date</Th>
-            <Th>Actions</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {users.map((user) => {
-            return (
-              <Tr key={user.id}>
-                <Td>{user.username}</Td>
-
-                <Td>{user.email ?? "(none)"}</Td>
-                <Td>{user.createdAt}</Td>
-
-                <Td>
-                  <Button onClick={() => deleteUser(user.id)}>Delete</Button>
-                </Td>
-              </Tr>
-            );
-          })}
-        </Tbody>
-      </Table>
-    </TableContainer>
+    <Skeleton isLoaded={!isLoading}>
+      <TableContainer>
+        <Table>
+          <TableCaption placement="top">{users.length} users</TableCaption>
+          <Thead>
+            <Tr>
+              <Th>Username</Th>
+              <Th>Join Date</Th>
+              <Th>Actions</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {users.map((user) => {
+              return (
+                <Tr key={user.id}>
+                  <Td>{user.username}</Td>
+                  <Td>{user.createdAt}</Td>
+                  <Td>
+                    <Button onClick={() => deleteUser(user.id)}>Delete</Button>
+                  </Td>
+                </Tr>
+              );
+            })}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </Skeleton>
   );
 }
