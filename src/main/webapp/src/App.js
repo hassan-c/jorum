@@ -5,8 +5,7 @@ import {
   HStack,
   Link,
   Spacer,
-  Stack,
-  Text
+  Stack
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import {
@@ -16,6 +15,7 @@ import {
   useNavigate
 } from "react-router-dom";
 import Header from "./components/Header";
+import Index from "./components/Index";
 import LoggedInUserMessage from "./components/LoggedInAs";
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm";
@@ -78,12 +78,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={
-                <Text>
-                  Welcome to jorum, a simple forum written in Spring Boot and
-                  React.
-                </Text>
-              }
+              element={<Index />}
             />
             <Route path="/users" element={<Users />} />
             <Route
