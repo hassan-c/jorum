@@ -4,6 +4,7 @@ import com.hasc.jorum.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -34,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                     .antMatchers("/api/v1/users/current").authenticated()
+                    .antMatchers(HttpMethod.POST, "/api/v1/category/*").authenticated()
                     .anyRequest().permitAll()
                 .and()
                     .logout()

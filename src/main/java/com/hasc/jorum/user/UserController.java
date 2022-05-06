@@ -1,6 +1,6 @@
 package com.hasc.jorum.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -9,14 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path ="api/v1/users")
+@AllArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping(path = "/current")
     public String getCurrentUser() {

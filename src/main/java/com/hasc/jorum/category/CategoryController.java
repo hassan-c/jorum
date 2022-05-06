@@ -1,16 +1,23 @@
 package com.hasc.jorum.category;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/category")
+@AllArgsConstructor
 public class CategoryController {
-    private String name;
+    private CategoryService categoryService;
 
     @GetMapping
-    public String getAllCategories() {
-        return "works";
+    public List<Category> getAllCategories() {
+        return categoryService.getCategories();
+    }
+
+    @PostMapping(path = "/{categoryName}")
+    public void addCategory(@PathVariable String categoryName) {
+        categoryService.addCategory(categoryName);
     }
 }
