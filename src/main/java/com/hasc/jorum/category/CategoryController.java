@@ -12,7 +12,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping
-    public List<Category> getAllCategories() {
+    public List<Category> getCategories() {
         return categoryService.getCategories();
     }
 }

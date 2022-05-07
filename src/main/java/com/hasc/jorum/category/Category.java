@@ -1,10 +1,13 @@
 package com.hasc.jorum.category;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hasc.jorum.section.Section;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -25,7 +28,6 @@ public class Category {
     private Long id;
     private String name;
 
-    public Category(String name) {
-        this.name = name;
-    }
+    @OneToMany(mappedBy = "category")
+    private List<Section> sections;
 }
