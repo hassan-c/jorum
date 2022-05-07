@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 export default function Header() {
@@ -29,7 +29,12 @@ export default function Header() {
             </Heading>
             {category.sections.map((section) => (
               <Flex key={section.id} p={4}>
-                <Box flex="6">{section.name}</Box>
+                <Box flex="6">
+                  <VStack alignItems="left">
+                    <Text>{section.name}</Text>
+                    <Text fontSize="xs">{section.description}</Text>
+                  </VStack>
+                </Box>
                 <Box flex="1">0</Box>
                 <Box flex="1">Today</Box>
               </Flex>
