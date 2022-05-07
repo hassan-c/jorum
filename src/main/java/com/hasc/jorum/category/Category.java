@@ -1,6 +1,5 @@
 package com.hasc.jorum.category;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hasc.jorum.section.Section;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
