@@ -50,6 +50,7 @@ function App() {
         <Stack spacing={5} minW={[300, 500, 1000]}>
           <Header />
 
+          {/* Todo: use <Flex> element here */}
           <HStack as="nav" bg="gray.50" p={2} spacing={4}>
             <Link as={RouterLink} to="/">
               Index

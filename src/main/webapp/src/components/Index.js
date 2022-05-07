@@ -1,4 +1,4 @@
-import { Box, Divider, Heading, VStack } from "@chakra-ui/react";
+import { Box, Flex, Heading, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 export default function Header() {
@@ -23,11 +23,17 @@ export default function Header() {
         </Box>
 
         {categories.map((category) => (
-          <Box>
-            <Heading as="h3" size="m">
+          <Box key={category.id}>
+            <Heading as="h3" size="m" bg="gray.200" p={2}>
               {category.name}
             </Heading>
-            <Divider />
+            {category.sections.map((section) => (
+              <Flex key={section.id} p={4}>
+                <Box flex="6">{section.name}</Box>
+                <Box flex="1">0</Box>
+                <Box flex="1">Today</Box>
+              </Flex>
+            ))}
           </Box>
         ))}
       </VStack>
