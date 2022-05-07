@@ -15,9 +15,4 @@ public class CategoryController {
     public List<Category> getAllCategories() {
         return categoryService.getCategories();
     }
-
-    @PostMapping(path = "/{categoryName}")
-    public void addCategory(@PathVariable String categoryName) {
-        categoryService.addCategory(categoryName);
-    }
 }
