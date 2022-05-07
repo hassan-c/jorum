@@ -1,5 +1,6 @@
 package com.hasc.jorum.section;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hasc.jorum.category.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class Section {
 
     private String description;
 
+    @JsonIgnore
     @ManyToOne
     private Category category;
 }
