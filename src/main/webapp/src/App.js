@@ -1,18 +1,6 @@
-import {
-  Button,
-  ChakraProvider,
-  Container,
-  HStack,
-  Link,
-  Spacer
-} from "@chakra-ui/react";
+import { Button, ChakraProvider, Container, HStack, Link, Spacer } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import {
-  Link as RouterLink,
-  Route,
-  Routes,
-  useNavigate
-} from "react-router-dom";
+import { Link as RouterLink, Route, Routes, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Index from "./components/Index";
 import LoggedInUserMessage from "./components/LoggedInAs";
@@ -77,10 +65,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/users" element={<Users />} />
-          <Route
-            path="login"
-            element={<LoginForm setLoggedInUser={setLoggedInUser} />}
-          />
+          <Route path="login" element={<LoginForm setLoggedInUser={setLoggedInUser} />} />
           <Route path="signup" element={<SignUpForm />} />
         </Routes>
       </Container>

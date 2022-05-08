@@ -1,5 +1,4 @@
 import {
-  Button,
   Skeleton,
   Table,
   TableCaption,
@@ -30,18 +29,10 @@ export default function Users() {
     fetchUsers();
   }, []);
 
-  async function deleteUser(id) {
-    const deleteUser = await fetch(`api/v1/users/${id}`, { method: "delete" });
-    if (deleteUser.ok) {
-      setUsers(() => users.filter((user) => user.id !== id));
-    } else {
-      alert(`Could not delete user with id ${id}`);
-    }
-  }
   return (
-    <Skeleton isLoaded={!isLoading}>
+    <Skeleton isLoaded={!isLoading} w="full">
       <TableContainer>
-        <Table w="full">
+        <Table>
           <TableCaption placement="top">{users.length} users</TableCaption>
           <Thead>
             <Tr>
@@ -56,9 +47,7 @@ export default function Users() {
                 <Tr key={user.id}>
                   <Td>{user.username}</Td>
                   <Td>{user.createdAt}</Td>
-                  <Td>
-                    <Button onClick={() => deleteUser(user.id)}>Delete</Button>
-                  </Td>
+                  <Td>0</Td>
                 </Tr>
               );
             })}

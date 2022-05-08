@@ -68,10 +68,7 @@ export default function SignUpForm() {
       )}
 
       <Box my={5}>
-        <p>
-          Usernames must be alphanumeric, though hyphens and underscores are
-          allowed.
-        </p>
+        <p>Usernames must be alphanumeric, though hyphens and underscores are allowed.</p>
       </Box>
 
       <form onSubmit={(event) => signUpUser(event)}>

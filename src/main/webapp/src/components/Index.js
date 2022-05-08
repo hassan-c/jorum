@@ -18,9 +18,7 @@ export default function Header() {
   return (
     <Box w="full">
       <VStack spacing={3} alignItems="left">
-        <Box my={3}>
-          Welcome to jorum, a simple forum written in Spring Boot and React.
-        </Box>
+        <Box my={3}>Welcome to jorum, a simple forum written in Spring Boot and React.</Box>
 
         {categories.map((category) => (
           <Box key={category.id}>
