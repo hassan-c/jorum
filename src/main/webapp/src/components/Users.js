@@ -38,7 +38,7 @@ export default function Users() {
             <Tr>
               <Th>Username</Th>
               <Th>Join Date</Th>
-              <Th>Actions</Th>
+              <Th isNumeric>Posts</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -47,7 +47,7 @@ export default function Users() {
                 <Tr key={user.id}>
                   <Td>{user.username}</Td>
                   <Td>{user.createdAt}</Td>
-                  <Td>0</Td>
+                  <Td isNumeric>0</Td>
                 </Tr>
               );
             })}
