@@ -41,7 +41,7 @@ export default function Users() {
   return (
     <Skeleton isLoaded={!isLoading}>
       <TableContainer>
-        <Table>
+        <Table w="full">
           <TableCaption placement="top">{users.length} users</TableCaption>
           <Thead>
             <Tr>

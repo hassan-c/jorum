@@ -52,7 +52,7 @@ export default function SignUpForm() {
   }
 
   return (
-    <Box className="signUpForm">
+    <Box w="full">
       <Box mb={4}>
         <Heading as="h4" size="lg">
           Sign up

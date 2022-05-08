@@ -1,11 +1,10 @@
 import {
   Button,
-  Center,
   ChakraProvider,
+  Container,
   HStack,
   Link,
-  Spacer,
-  Stack
+  Spacer
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import {
@@ -46,50 +45,45 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Center>
-        <Stack spacing={5} minW={[300, 500, 1000]}>
-          <Header />
+      <Container centerContent maxW={900}>
+        <Header />
 
-          {/* Todo: use <Flex> element here */}
-          <HStack as="nav" bg="gray.50" p={2} spacing={4}>
-            <Link as={RouterLink} to="/">
-              Index
-            </Link>
-            <Link as={RouterLink} to="/users">
-              Users
-            </Link>
-            <Spacer />
-            {loggedInUser ? (
-              <HStack>
-                <LoggedInUserMessage loggedInUser={loggedInUser} />
-                <Button onClick={logoutUser}>Log out</Button>
-              </HStack>
-            ) : (
-              <>
-                <Button as={RouterLink} to="/login">
-                  Log in
-                </Button>
-                <Button as={RouterLink} to="/signup">
-                  Sign up
-                </Button>
-              </>
-            )}
-          </HStack>
+        {/* Todo: use <Flex> element here */}
+        <HStack as="nav" bg="gray.50" p={2} spacing={4} w="full">
+          <Link as={RouterLink} to="/">
+            Index
+          </Link>
+          <Link as={RouterLink} to="/users">
+            Users
+          </Link>
+          <Spacer />
+          {loggedInUser ? (
+            <HStack>
+              <LoggedInUserMessage loggedInUser={loggedInUser} />
+              <Button onClick={logoutUser}>Log out</Button>
+            </HStack>
+          ) : (
+            <>
+              <Button as={RouterLink} to="/login">
+                Log in
+              </Button>
+              <Button as={RouterLink} to="/signup">
+                Sign up
+              </Button>
+            </>
+          )}
+        </HStack>
 
-          <Routes>
-            <Route
-              path="/"
-              element={<Index />}
-            />
-            <Route path="/users" element={<Users />} />
-            <Route
-              path="login"
-              element={<LoginForm setLoggedInUser={setLoggedInUser} />}
-            />
-            <Route path="signup" element={<SignUpForm />} />
-          </Routes>
-        </Stack>
-      </Center>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/users" element={<Users />} />
+          <Route
+            path="login"
+            element={<LoginForm setLoggedInUser={setLoggedInUser} />}
+          />
+          <Route path="signup" element={<SignUpForm />} />
+        </Routes>
+      </Container>
     </ChakraProvider>
   );
 }

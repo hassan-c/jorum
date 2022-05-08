@@ -16,7 +16,7 @@ export default function Header() {
   }, []);
 
   return (
-    <Box>
+    <Box w="full">
       <VStack spacing={3} alignItems="left">
         <Box my={3}>
           Welcome to jorum, a simple forum written in Spring Boot and React.

@@ -49,7 +49,7 @@ export default function LoginForm({ setLoggedInUser }) {
   }
 
   return (
-    <Box className="loginForm">
+    <Box w="full">
       <Box mb={4}>
         <Heading as="h4" size="lg">
           Log in
