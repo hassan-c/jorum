@@ -37,7 +37,7 @@ function App() {
         <Header />
 
         {/* Todo: use <Flex> element here */}
-        <HStack as="nav" bg="gray.50" p={2} spacing={4} w="full">
+        <HStack as="nav" bg="gray.50" p={2} spacing={4} w="full" my={4}>
           <Link as={RouterLink} to="/">
             Index
           </Link>
