@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Index from "./components/Index";
 import LoggedInUserMessage from "./components/LoggedInAs";
 import LoginForm from "./components/LoginForm";
+import Section from "./components/Section";
 import SignUpForm from "./components/SignUpForm";
 import Users from "./components/Users";
 
@@ -65,8 +66,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/users" element={<Users />} />
-          <Route path="login" element={<LoginForm setLoggedInUser={setLoggedInUser} />} />
-          <Route path="signup" element={<SignUpForm />} />
+          <Route path="/login" element={<LoginForm setLoggedInUser={setLoggedInUser} />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/section/:id/:name" element={<Section />} />
+          <Route path="/section/:id" element={<Section />} />
         </Routes>
       </Container>
     </ChakraProvider>
