@@ -38,7 +38,13 @@ export default function Header() {
               </Text>
             </Flex>
             {category.sections.map((section) => (
-              <Flex as={RouterLink} to="/" key={section.id} p={4} _hover={{ background: "gray.50" }}>
+              <Flex
+                as={RouterLink}
+                to={`/section/${section.id}/${section.name.toLowerCase()}`}
+                key={section.id}
+                p={4}
+                _hover={{ background: "gray.50" }}
+              >
                 <Box flex="6">
                   <VStack alignItems="left">
                     <Text>{section.name}</Text>
