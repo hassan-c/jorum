@@ -5,6 +5,10 @@ import { Link as RouterLink } from "react-router-dom";
 export default function Header() {
   const [categories, setCategories] = useState([]);
 
+  function slug(name) {
+    return name.toLowerCase().replace(' ', '-');
+  }
+
   useEffect(() => {
     async function fetchCategories() {
       const getCategories = await fetch(`api/v1/category`);
@@ -40,7 +44,7 @@ export default function Header() {
             {category.sections.map((section) => (
               <Flex
                 as={RouterLink}
-                to={`/section/${section.id}/${section.name.toLowerCase()}`}
+                to={`/section/${slug(section.name)}`}
                 key={section.id}
                 p={4}
                 _hover={{ background: "gray.50" }}
