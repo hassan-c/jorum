@@ -2,11 +2,13 @@ package com.hasc.jorum.section;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hasc.jorum.category.Category;
+import com.hasc.jorum.thread.Thread;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "section")
@@ -33,4 +35,7 @@ public class Section {
     @JsonIgnore
     @ManyToOne
     private Category category;
+
+    @OneToMany(mappedBy = "section")
+    private List<Thread> threads;
 }

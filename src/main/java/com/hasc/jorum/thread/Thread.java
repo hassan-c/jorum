@@ -1,6 +1,7 @@
 package com.hasc.jorum.thread;
 
 import com.hasc.jorum.post.Post;
+import com.hasc.jorum.section.Section;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,6 +27,9 @@ public class Thread {
     )
     private Long id;
     private String title;
+
+    @ManyToOne
+    private Section section;
 
     @OneToMany(mappedBy = "thread")
     private List<Post> posts;
