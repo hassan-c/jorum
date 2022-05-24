@@ -15,4 +15,9 @@ public class SectionController {
     public List<Section> getSections() {
         return sectionService.getSections();
     }
+
+    @GetMapping("/{section}")
+    public Section getSection(@PathVariable String section) {
+        return sectionService.getSectionByName(section);
+    }
 }

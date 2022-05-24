@@ -14,8 +14,5 @@ import java.util.List;
 public class ThreadController {
     private final ThreadService threadService;
 
-    @GetMapping("/{section}")
-    public List<Thread> getThreadsForSection(@PathVariable String section) {
-        return threadService.getThreadsForSection(section);
-    }
+
 }

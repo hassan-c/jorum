@@ -13,4 +13,8 @@ public class SectionService {
     public List<Section> getSections() {
         return sectionRepository.findAll();
     }
+
+    public Section getSectionByName(String name) {
+        return sectionRepository.findByName(name);
+    }
 }
