@@ -6,7 +6,7 @@ export default function Header() {
   const [categories, setCategories] = useState([]);
 
   function slug(name) {
-    return name.toLowerCase().replace(' ', '-');
+    return name.toLowerCase().replace(" ", "-");
   }
 
   useEffect(() => {
@@ -31,13 +31,13 @@ export default function Header() {
               <Heading as="h3" size="m" flex="6">
                 {category.name}
               </Heading>
-              <Text flex="1" textAlign="right">
+              <Text flex="1" px={2} textAlign="right">
                 Threads
               </Text>
-              <Text flex="1" textAlign="right">
+              <Text flex="1" px={2} textAlign="right">
                 Posts
               </Text>
-              <Text flex="1" textAlign="right">
+              <Text flex="1" px={2} textAlign="right">
                 Last post
               </Text>
             </Flex>
@@ -55,13 +55,13 @@ export default function Header() {
                     <Text fontSize="xs">{section.description}</Text>
                   </VStack>
                 </Box>
-                <Box flex="1" textAlign="right">
+                <Box flex="1" px={2} textAlign="right">
                   0
                 </Box>
-                <Box flex="1" textAlign="right">
+                <Box flex="1" px={2} textAlign="right">
                   0
                 </Box>
-                <Box flex="1" textAlign="right">
+                <Box flex="1" px={2} textAlign="right">
                   Today
                 </Box>
               </Flex>
