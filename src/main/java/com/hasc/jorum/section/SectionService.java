@@ -1,5 +1,6 @@
 package com.hasc.jorum.section;
 
+import com.hasc.jorum.util.Slug;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,8 @@ public class SectionService {
         return sectionRepository.findAll();
     }
 
-    public Section getSectionByName(String name) {
-        return sectionRepository.findByName(name);
+    public Section getSectionByNameSlug(String sectionNameSlug) {
+        final var sectionName = Slug.deSlugify(sectionNameSlug);
+        return sectionRepository.findByNameEqualsIgnoreCase(sectionName);
     }
 }

@@ -18,6 +18,6 @@ public class SectionController {
 
     @GetMapping("/{section}")
     public Section getSection(@PathVariable String section) {
-        return sectionService.getSectionByName(section);
+        return sectionService.getSectionByNameSlug(section);
     }
 }
