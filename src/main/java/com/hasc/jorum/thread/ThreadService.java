@@ -17,6 +17,7 @@ public class ThreadService {
     public Thread addThread(ThreadCreationRequest request) {
         Thread thread = new Thread();
         return sectionService.getSectionById(request.sectionId()).map(section -> {
+            thread.setTitle(request.title());
             thread.setSection(section);
             return threadRepository.save(thread);
         }).orElseThrow(() -> new SectionNotFoundException("Section with ID=" + request.sectionId() + " does not exist."));

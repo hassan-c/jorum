@@ -1,5 +1,6 @@
 package com.hasc.jorum.thread;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hasc.jorum.post.Post;
 import com.hasc.jorum.section.Section;
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class Thread {
         this.title = title;
     }
 
+    @JsonIgnore
     @ManyToOne
     private Section section;
 
