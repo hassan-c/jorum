@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -18,5 +19,9 @@ public class SectionService {
     public Section getSectionByNameSlug(String sectionNameSlug) {
         final var sectionName = Slug.deSlugify(sectionNameSlug);
         return sectionRepository.findByNameEqualsIgnoreCase(sectionName);
+    }
+
+    public Optional<Section> getSectionById(Long sectionId) {
+        return sectionRepository.findById(sectionId);
     }
 }

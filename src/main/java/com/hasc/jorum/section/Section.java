@@ -32,7 +32,6 @@ public class Section {
 
     private String description;
 
-    @JsonIgnore
     @ManyToOne
     private Category category;
 

@@ -1,5 +1,9 @@
-import { Text } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 
 export default function Section() {
-  return <Text>Nothing to see here yet!</Text>;
+  return (
+    <Box w="full">
+      <Button>+ Create new thread</Button>
+    </Box>
+  );
 }

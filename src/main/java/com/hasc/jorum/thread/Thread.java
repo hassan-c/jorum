@@ -28,6 +28,10 @@ public class Thread {
     private Long id;
     private String title;
 
+    public Thread(String title) {
+        this.title = title;
+    }
+
     @ManyToOne
     private Section section;
 
